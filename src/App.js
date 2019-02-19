@@ -89,7 +89,8 @@ class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
@@ -112,6 +113,8 @@ class App extends Component {
                     })}
                 </div>
             );
+
+            style.backgroundColor = 'red';
         }
 
             return (<div className="App">
@@ -122,14 +125,8 @@ class App extends Component {
 
                 <button style={style} onClick={this.togglePersonsHandler}>Toggle persons</button>
 
-                {/* this is an easier way to write a switch handler, but react can sometimes re-render things too often this way, so it's not recommended. */
-                } {/* <button onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button> */
-                }
-
                 {persons}
                 </div>);
-
-            // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, this is a React app'));
         }
     }
 
