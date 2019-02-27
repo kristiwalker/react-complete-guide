@@ -1,5 +1,6 @@
 /* jshint esversion: 6 */
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 // These are stateful components because they use a state (no matter if it's the useState hook or a class-based approach with the state property)
@@ -94,7 +95,11 @@ class App extends Component {
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            ':hover': {
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            }
         };
 
         let persons = null;
@@ -115,6 +120,10 @@ class App extends Component {
             );
 
             style.backgroundColor = 'red';
+            style[':hover'] = {
+                backgroundColor: 'salmon',
+                color: 'black'
+            }
         }
 
         const classes = [];
@@ -140,7 +149,7 @@ class App extends Component {
         }
     }
 
-    export default App;
+    export default Radium(App);
 
     /* FUNCTIONAL COMPONENT EXAMPLE */
     //

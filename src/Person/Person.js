@@ -3,6 +3,7 @@
 // This is a stateless component because it has no internal state management
 
 import React from 'react';
+import Radium from 'radium';
 import './Person.css';
 
 const person = (props) => {
@@ -15,4 +16,4 @@ const person = (props) => {
     </div>)
 };
 
-export default person;
+export default Radium(person);
