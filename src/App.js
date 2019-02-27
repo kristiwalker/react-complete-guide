@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 // These are stateful components because they use a state (no matter if it's the useState hook or a class-based approach with the state property)
@@ -120,15 +120,15 @@ class App extends Component {
         const classes = [];
 
         if (this.state.persons.length <= 2) {
-            classes.push('red');
+            classes.push(classes.red);
         }
 
         if (this.state.persons.length <= 1) {
-            classes.push('bold');
+            classes.push(classes.bold);
         }
 
             return (
-                <div className="App">
+                <div className={classes.App}>
                     <h1>Hi, I'm a React app</h1>
                     <p className={classes.join(' ')}>This is really working!</p>
 
