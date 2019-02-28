@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 // These are stateful components because they use a state (no matter if it's the useState hook or a class-based approach with the state property)
 
@@ -95,13 +96,14 @@ class App extends Component {
             persons = (
                 <div>
                     {this.state.persons.map((person, i) => {
-                        return <Person
+                        return <ErrorBoundary                                key={person.id}>
+                            <Person
                             click={() => this.deletePersonHandler(i)}
                             name={person.name}
                             age={person.age}
-                            key={person.id}
                             // this function below gets executed upon the onChange event (in Person.js)
                             changed={(event) => this.nameChangedHandler(event, person.id)} />
+                            </ErrorBoundary>
                     })}
                 </div>
             );
