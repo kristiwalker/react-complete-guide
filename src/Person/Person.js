@@ -3,7 +3,6 @@
 // This is a stateless component because it has no internal state management
 
 import React from 'react';
-import Radium from 'radium';
 import classes from './Person.css';
 
 const person = (props) => {
