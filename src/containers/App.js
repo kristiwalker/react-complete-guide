@@ -10,24 +10,61 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import React, {Component} from 'react';
 
 class App extends Component {
-    state = {
-        persons: [
-            {
-                id: '1',
-                name: 'Max',
-                age: 28
-            }, {
-                id: '2',
-                name: 'Manu',
-                age: 29
-            }, {
-                id: '3',
-                name: 'Stepanie',
-                age: 26
-            }
-        ],
-        otherState: 'some other value'
-    };
+    // This is the old, complex way of writing state. Now a state property in a class includes all of this info for us.
+        constructor(props) {
+            super(props);
+            console.log('[App.js] constructor');
+            this.state = {
+                persons: [
+                    {
+                        id: '1',
+                        name: 'Max',
+                        age: 28
+                    }, {
+                        id: '2',
+                        name: 'Manu',
+                        age: 29
+                    }, {
+                        id: '3',
+                        name: 'Stepanie',
+                        age: 26
+                    }
+                ],
+                otherState: 'some other value'
+            };
+        }
+
+    // state = {
+    //     persons: [
+    //         {
+    //             id: '1',
+    //             name: 'Max',
+    //             age: 28
+    //         }, {
+    //             id: '2',
+    //             name: 'Manu',
+    //             age: 29
+    //         }, {
+    //             id: '3',
+    //             name: 'Stepanie',
+    //             age: 26
+    //         }
+    //     ],
+    //     otherState: 'some other value'
+    // };
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
+    }
+
+    componentWillMount() {
+        console.log('[App.js] componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
 
     deletePersonHandler = (personIndex) => {
         // slice copies the array and returns it to your variable as a new one that doesn't overrite the woritingal array
@@ -71,6 +108,8 @@ class App extends Component {
     }
 
     render() {
+        console.log('[App.js] render');
+
         let persons = null;
 
         if (this.state.showPersons) {
@@ -85,6 +124,7 @@ class App extends Component {
         return (
             <div className={classes.App}>
                 <Cockpit
+                    title={this.props.appTitle} // need this to access its props only because this is inside a class instead of functional component
                     showPersons={this.state.showPersons}
                     persons={this.state.persons}
                     clicked={this.togglePersonsHandler}/>
