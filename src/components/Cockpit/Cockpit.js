@@ -1,8 +1,18 @@
 /* jshint esversion: 6 */
-import React from 'react';
+import React, {useEffect} from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        // http request... (or whatever)
+        setTimeout(() => {
+            alert('Saved data to cloud!');
+        }, 1000);
+    }, []); // use empty array to tell it to only run once, otherwise something like [props.persons] to tell it to only run when a certain prop updates
+
+    // useEffect();
+
     const assignedClasses = [];
     let btnClass = '';
 
