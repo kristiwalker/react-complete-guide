@@ -4,14 +4,20 @@ import classes from './Cockpit.css';
 
 const cockpit = (props) => {
     useEffect(() => {
+        // this runs code when the component is mounted
         console.log('[Cockpit.js] useEffect');
         // http request... (or whatever)
         setTimeout(() => {
             alert('Saved data to cloud!');
         }, 1000);
+        return () => { // this run codes when the component is unmounted
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        }
     }, []); // use empty array to tell it to only run once, otherwise something like [props.persons] to tell it to only run when a certain prop updates
 
-    // useEffect();
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+    }); // no array argument passed means it runs every update cycle
 
     const assignedClasses = [];
     let btnClass = '';
@@ -20,11 +26,11 @@ const cockpit = (props) => {
         btnClass = classes.Red;
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
         assignedClasses.push(classes.red);
     }
 
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
         assignedClasses.push(classes.bold);
     }
 
@@ -37,4 +43,4 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+export default React.memo(cockpit);

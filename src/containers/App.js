@@ -14,6 +14,7 @@ class App extends Component {
         constructor(props) {
             super(props);
             console.log('[App.js] constructor');
+
             this.state = {
                 persons: [
                     {
@@ -30,7 +31,8 @@ class App extends Component {
                         age: 26
                     }
                 ],
-                otherState: 'some other value'
+                otherState: 'some other value',
+                showCockpit: true
             };
         }
 
@@ -133,11 +135,20 @@ class App extends Component {
 
         return (
             <div className={classes.App}>
-                <Cockpit
-                    title={this.props.appTitle} // need this to access its props only because this is inside a class instead of functional component
-                    showPersons={this.state.showPersons}
-                    persons={this.state.persons}
-                    clicked={this.togglePersonsHandler}/>
+
+                <button onClick={() => {
+                    this.setState({showCockpit: false})
+                }}>
+                Remove Cockpit
+                </button>
+
+                {this.state.showCockpit ? (
+                    <Cockpit
+                        title={this.props.appTitle} // need this to access its props only because this is inside a class instead of functional component
+                        showPersons={this.state.showPersons}
+                        personsLength={this.state.persons.length}
+                        clicked={this.togglePersonsHandler}/>
+                ) : null}
                 {persons}
             </div>
         );
