@@ -2,7 +2,7 @@
 import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
-class Persons extends PureComponent { // PureComponent implements shouldComponentUpdate with a complete props check
+class Persons extends PureComponent { // PureComponent implements shouldComponentUpdate with a complete props checkno
     // static getDerivedStateFromProps(props, state) {
     //     console.log('[Persons.js] getDerivedStateFromProps');
     //     return state;
