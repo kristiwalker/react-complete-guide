@@ -2,6 +2,8 @@
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux/Aux';
 
 // These are stateful components because they use a state (no matter if it's the useState hook or a class-based approach with the state property)
 
@@ -32,7 +34,8 @@ class App extends Component {
                     }
                 ],
                 otherState: 'some other value',
-                showCockpit: true
+                showCockpit: true,
+                changeCounter: 0
             };
         }
 
@@ -109,7 +112,12 @@ class App extends Component {
         persons[personIndex] = person;
 
         // set states of persons, copies unchanged objects and updates changed object
-        this.setState({persons: persons});
+        this.setState((prevState, props) => {
+            return {
+                persons: persons,
+                changeCounter: prevState.changeCounter + 1                
+            };
+        });
     }
 
     togglePersonsHandler = () => {
@@ -134,8 +142,7 @@ class App extends Component {
         }
 
         return (
-            <div className={classes.App}>
-
+            <Aux>
                 <button onClick={() => {
                     this.setState({showCockpit: false})
                 }}>
@@ -150,9 +157,9 @@ class App extends Component {
                         clicked={this.togglePersonsHandler}/>
                 ) : null}
                 {persons}
-            </div>
+            </Aux>
         );
     }
 }
 
-export default App;
+export default withClass(App, classes.App);
