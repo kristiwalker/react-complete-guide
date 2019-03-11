@@ -49,7 +49,4 @@ class Persons extends PureComponent { // PureComponent implements shouldComponen
     }
 }
 
-const persons = (props) => {
-}
-
 export default Persons;
