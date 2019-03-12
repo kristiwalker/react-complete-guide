@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux/Aux';
+import AuthContext from '../context/auth-context';
 
 // These are stateful components because they use a state (no matter if it's the useState hook or a class-based approach with the state property)
 
@@ -35,7 +36,8 @@ class App extends Component {
                 ],
                 otherState: 'some other value',
                 showCockpit: true,
-                changeCounter: 0
+                changeCounter: 0,
+                authenticated: false
             };
         }
 
@@ -127,6 +129,10 @@ class App extends Component {
         });
     }
 
+    loginHandler = () => {
+        this.setState({authenticated: true});
+    }
+
     render() {
         console.log('[App.js] render');
 
@@ -137,7 +143,8 @@ class App extends Component {
                 <Persons
                     persons={this.state.persons}
                     clicked={this.deletePersonHandler}
-                    changed={this.nameChangedHandler} />
+                    changed={this.nameChangedHandler}
+                    isAuthenticated={this.state.authenticated} />
             );
         }
 
@@ -149,14 +156,19 @@ class App extends Component {
                 Remove Cockpit
                 </button>
 
-                {this.state.showCockpit ? (
-                    <Cockpit
-                        title={this.props.appTitle} // need this to access its props only because this is inside a class instead of functional component
-                        showPersons={this.state.showPersons}
-                        personsLength={this.state.persons.length}
-                        clicked={this.togglePersonsHandler}/>
-                ) : null}
-                {persons}
+                <AuthContext.Provider value={{
+                    authenticated: this.state.authenticated,
+                    login: this.loginHandler
+                }}>
+                    {this.state.showCockpit ? (
+                        <Cockpit
+                            title={this.props.appTitle} // need this to access its props only because this is inside a class instead of functional component
+                            showPersons={this.state.showPersons}
+                            personsLength={this.state.persons.length}
+                            clicked={this.togglePersonsHandler} />
+                    ) : null}
+                    {persons}
+                </AuthContext.Provider>
             </Aux>
         );
     }
